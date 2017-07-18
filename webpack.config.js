@@ -5,29 +5,29 @@ module.exports = {
     path: './src/main.js'
   },
   output: {
-    path: './build',
+    path: __dirname+'/build',
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loader: 'babel-loader'
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   devtool: 'eval-source-map',
   devServer: {
     contentBase: './build',
-    inline: true,
-    hot: true
+    inline: true
   }
 }
